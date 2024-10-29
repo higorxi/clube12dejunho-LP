@@ -1,406 +1,440 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clube 12 de Junho - Agendamento de Quadras</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2D5A27;
-            --secondary-color: #4A8C43;
-        }
-
-        .palm-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 25c2-2.5 4-3.5 6-3.5s4 1 6 3.5m-12-2c0-2 1-3.5 2.5-4.5s3.5-1.5 5.5-1.5 4 0.5 5.5 1.5 2.5 2.5 2.5 4.5m-16-2c0-2 1-3.5 2.5-4.5s3.5-1.5 5.5-1.5 4 0.5 5.5 1.5 2.5 2.5 2.5 4.5' fill='none' stroke='rgba(45, 90, 39, 0.1)' stroke-width='2'/%3E%3C/svg%3E");
-        }
-
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1920/1080');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .step-form {
-            display: none;
-        }
-
-        .step-form.active {
-            display: block;
-        }
-
-        .selected {
-            border-color: #38a169;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: #38a169;
-            margin-bottom: 2rem;
-        }
-
-        .progress {
-            height: 100%;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .time-slot {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .time-slot:hover {
-            transform: scale(1.02);
-        }
-
-        .time-slot.selected {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .court-card {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .court-card:hover {
-            transform: scale(1.03);
-        }
-
-        .court-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-color);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .court-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .palm-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .custom-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-    </style>
-</head>
-<body class="bg-gray-50">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clube 2 de Junho - Agendamento de Quadras</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicons/favicon-16x16.png"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="bg-white shadow-lg fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <div class="text-2xl font-bold text-[#2D5A27]">Clube 12 de Junho</div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#inicio" class="text-gray-600 hover:text-[#2D5A27]">Início</a>
-                    <a href="#quadras" class="text-gray-600 hover:text-[#2D5A27]">Quadras</a>
-                    <a href="#estrutura" class="text-gray-600 hover:text-[#2D5A27]">Estrutura</a>
-                    <a href="#reservas" class="text-gray-600 hover:text-[#2D5A27]">Reservas</a>
-                    <a href="#bar" class="text-gray-600 hover:text-[#2D5A27]">Bar</a>
-                </div>
-            </div>
+    <nav class="bg-green-600 shadow-lg fixed w-full z-50 text-white">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+          <div class="text-2xl font-bold text-[#2D5A27]">Clube 2 de Junho</div>
+          <div class="hidden md:flex space-x-8">
+            <a href="#inicio" class="text-gray-50 hover:text-[#2D5A27]"
+              >Início</a
+            >
+            <a href="#quadras" class="text-gray-50 hover:text-[#2D5A27]"
+              >Quadras</a
+            >
+            <a href="#estrutura" class="text-gray-50 hover:text-[#2D5A27]"
+              >Estrutura</a
+            >
+            <a href="#reservas" class="text-gray-50 hover:text-[#2D5A27]"
+              >Reservas</a
+            >
+            <a href="#bar" class="text-gray-50 hover:text-[#2D5A27]">Bar</a>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero-section h-screen flex items-center justify-center text-white palm-pattern">
-        <div class="text-center">
-            <h1 class="text-6xl font-bold mb-4">Clube 12 de Junho</h1>
-            <p class="text-2xl mb-8">Seu espaço de lazer e esporte</p>
-            <a href="#reservas" class="bg-[#2D5A27] hover:bg-[#4A8C43] text-white font-bold py-3 px-8 rounded-full transition duration-300">
-                Reserve sua Quadra
-            </a>
+    <section id="inicio" class="hero-section h-screen flex items-center justify-center text-white relative overflow-hidden">
+        <!-- Vídeo de Fundo -->
+        <video autoplay muted loop class="absolute inset-0 object-cover w-full h-full z-0">
+          <source src="/video/video-piscina.mp4" type="video/mp4">
+          Seu navegador não suporta o vídeo.
+        </video>
+      
+        <!-- Conteúdo em cima do vídeo -->
+        <div class="text-center relative z-10">
+          <h1 class="text-6xl font-bold mb-4">Clube 2 de Junho</h1>
+          <p class="text-2xl mb-8">Seu espaço de lazer e esporte</p>
+          <a
+            href="#reservas"
+            class="bg-[#2D5A27] hover:bg-[#4A8C43] text-white font-bold py-3 px-8 rounded-full transition duration-300 bg-green-600 "
+          >
+            Reserve sua Quadra
+          </a>
         </div>
-    </section>
+      </section>
 
     <!-- Quadras Section -->
     <section id="quadras" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">Nossas Quadras</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="court-card rounded-lg overflow-hidden shadow-lg" data-court="1">
-                    <img src="/api/placeholder/600/400" alt="Quadra 1" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Quadra 1</h3>
-                        <p class="text-gray-600 mb-4">Quadra poliesportiva coberta com piso de alta performance e iluminação profissional.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-[#2D5A27] font-bold">R$ 70,00/hora</span>
-                            <button class="bg-[#2D5A27] text-white px-4 py-2 rounded hover:bg-[#4A8C43] transition duration-300">
-                                Reservar Agora
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="court-card rounded-lg overflow-hidden shadow-lg" data-court="2">
-                    <img src="/api/placeholder/600/400" alt="Quadra 2" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2">Quadra 2</h3>
-                        <p class="text-gray-600 mb-4">Quadra especial para futsal com gramado sintético de última geração.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-[#2D5A27] font-bold">R$ 70,00/hora</span>
-                            <button class="bg-[#2D5A27] text-white px-4 py-2 rounded hover:bg-[#4A8C43] transition duration-300">
-                                Reservar Agora
-                            </button>
-                        </div>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Nossas Quadras</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div
+            class="court-card rounded-lg overflow-hidden shadow-lg"
+            data-court="1"
+          >
+            <img
+              src="/img/quadra-areia-1.jpg"
+              alt="Quadra 1"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Quadra 1</h3>
+              <p class="text-gray-600 mb-4">
+                Quadra poliesportiva coberta com piso de alta performance e
+                iluminação profissional.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-[#2D5A27] font-bold">R$ 70,00/hora</span>
+                <button
+                  class="bg-[#2D5A27] text-white px-4 py-2 rounded hover:bg-[#4A8C43] transition duration-300"
+                >
+                  Reservar Agora
+                </button>
+              </div>
             </div>
+          </div>
+          <div
+            class="court-card rounded-lg overflow-hidden shadow-lg"
+            data-court="2"
+          >
+            <img
+              src="/img/quadra-areia-2.jpg"
+              alt="Quadra 2"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2">Quadra 2</h3>
+              <p class="text-gray-600 mb-4">
+                Quadra especial para futsal com gramado sintético de última
+                geração.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-[#2D5A27] font-bold">R$ 70,00/hora</span>
+                <button
+                  class="bg-[#2D5A27] text-white px-4 py-2 rounded hover:bg-[#4A8C43] transition duration-300"
+                >
+                  Reservar Agora
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Bar Section -->
-    <section id="bar" class="py-20 bg-gray-50 palm-pattern">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">Bar & Estrutura</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-lg p-6 shadow-lg">
-                    <img src="/api/placeholder/400/300" alt="Bar" class="w-full h-48 object-cover rounded mb-4">
-                    <h3 class="text-xl font-bold mb-2">Bar do Clube</h3>
-                    <p class="text-gray-600">Bebidas geladas e petiscos para seu momento de lazer.</p>
-                </div>
-                <div class="bg-white rounded-lg p-6 shadow-lg">
-                    <img src="/api/placeholder/400/300" alt="Área de Convivência" class="w-full h-48 object-cover rounded mb-4">
-                    <h3 class="text-xl font-bold mb-2">Área de Convivência</h3>
-                    <p class="text-gray-600">Espaço amplo para confraternizações e eventos.</p>
-                </div>
-                <div class="bg-white rounded-lg p-6 shadow-lg">
-                    <img src="/api/placeholder/400/300" alt="Vestiários" class="w-full h-48 object-cover rounded mb-4">
-                    <h3 class="text-xl font-bold mb-2">Vestiários</h3>
-                    <p class="text-gray-600">Estrutura completa com chuveiros e armários.</p>
-                </div>
-            </div>
+    <section id="bar" class="py-20 bg-green-50 palm-pattern">
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">Bar & Estrutura</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-lg p-6 shadow-lg">
+            <img
+              src="/img/lazer.jpg"
+              alt="Bar"
+              class="w-full h-48 object-cover rounded mb-4"
+            />
+            <h3 class="text-xl font-bold mb-2">Bar do Clube</h3>
+            <p class="text-gray-600">
+              Bebidas geladas e petiscos para seu momento de lazer.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 shadow-lg">
+            <img
+              src="/img/convivencia.jpg"
+              alt="Área de Convivência"
+              class="w-full h-48 object-cover rounded mb-4"
+            />
+            <h3 class="text-xl font-bold mb-2">Área de Convivência</h3>
+            <p class="text-gray-600">
+              Espaço amplo para confraternizações e eventos.
+            </p>
+          </div>
+          <div class="bg-white rounded-lg p-6 shadow-lg">
+            <img
+              src="/img/espaco.jpg"
+              alt="Vestiários"
+              class="w-full h-48 object-cover rounded mb-4"
+            />
+            <h3 class="text-xl font-bold mb-2">Vestiários</h3>
+            <p class="text-gray-600">
+              Estrutura completa com chuveiros e armários.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Eventos Section -->
     <section id="eventos" class="py-20 bg-gray-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">Aluguel para Eventos</h2>
-            <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-                <div class="grid md:grid-cols-2">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-4">Realize seu Evento Conosco</h3>
-                        <p class="text-gray-600 mb-6">O Clube 12 de Junho oferece um espaço exclusivo para seus eventos. Estrutura completa para:</p>
-                        <ul class="space-y-4">
-                            <li class="flex items-center">
-                                <span class="text-green-600 mr-3 text-xl">🎉</span>
-                                Festas de aniversário
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-green-600 mr-3 text-xl">🏆</span>
-                                Eventos esportivos
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-green-600 mr-3 text-xl">🤝</span>
-                                Confraternizações
-                            </li>
-                            <li class="flex items-center">
-                                <span class="text-green-600 mr-3 text-xl">💼</span>
-                                Eventos corporativos
-                            </li>
-                        </ul>
-                        <button class="mt-8 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-                            Solicitar Orçamento
-                        </button>
-                    </div>
-                    <div class="relative">
-                        <img src="/api/placeholder/800/600" alt="Espaço para eventos" class="w-full h-full object-cover">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
-                            <p class="text-white text-lg">Capacidade para até 200 pessoas</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-12">
+          Aluguel para Eventos
+        </h2>
+        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+          <div class="grid md:grid-cols-2">
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-4">
+                Realize seu Evento Conosco
+              </h3>
+              <p class="text-gray-600 mb-6">
+                O Clube 2 de Junho oferece um espaço exclusivo para seus
+                eventos. Estrutura completa para:
+              </p>
+              <ul class="space-y-4">
+                <li class="flex items-center">
+                  <span class="text-green-600 mr-3 text-xl">🎉</span>
+                  Festas de aniversário
+                </li>
+                <li class="flex items-center">
+                  <span class="text-green-600 mr-3 text-xl">🏆</span>
+                  Eventos esportivos
+                </li>
+                <li class="flex items-center">
+                  <span class="text-green-600 mr-3 text-xl">🤝</span>
+                  Confraternizações
+                </li>
+                <li class="flex items-center">
+                  <span class="text-green-600 mr-3 text-xl">💼</span>
+                  Eventos corporativos
+                </li>
+              </ul>
+              <button
+                class="mt-8 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+              >
+                Solicitar Orçamento
+              </button>
             </div>
+            <div class="relative">
+              <img
+                src="/img/parque.jpg"
+                alt="Espaço para eventos"
+                class="w-full h-full object-cover"
+              />
+              <div
+                class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6"
+              >
+                <p class="text-white text-lg">
+                  Capacidade para até 200 pessoas
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
-     <!-- Formulário Step by Step -->
-     <section id="agendar" class="py-20 bg-white">
-        <div class="max-w-3xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12">Agende sua Quadra</h2>
-            
-            <!-- Progress Bar -->
-            <div class="mb-8">
-                <div class="flex justify-between mb-2 step-header">
-                    <span class="step-1 font-bold text-green-600">Quadra</span>
-                    <span class="step-2 font-bold text-gray-400">Data</span>
-                    <span class="step-3 font-bold text-gray-400">Horários</span>
-                    <span class="step-4 font-bold text-gray-400">Dados</span>
-                </div>
-                <div class="h-2 bg-gray-200 rounded-full">
-                    <div class="progress-bar h-full bg-green-600 rounded-full transition-all duration-500" style="width: 25%"></div>
-                </div>
-            </div>
+    <!-- Formulário Step by Step -->
+    <section
+      class="bg-white shadow-lg rounded-lg p-6 mb-6 px-16"
+      style="min-height: 600px"
+    >
+      <!-- Define a altura mínima para evitar efeito sanfona -->
+      <h1 class="text-3xl font-bold mb-4">Agendamento de Quadra</h1>
 
-            <!-- Formulário -->
-            <div class="bg-white shadow-lg rounded-lg p-8">
-                <!-- Step 1: Escolha da Quadra -->
-                <div class="step-form active" id="step1">
-                    <h3 class="text-2xl font-bold mb-6">Escolha sua Quadra</h3>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="cursor-pointer quadra" onclick="selectQuadra(this)">
-                            <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-green-600 transition duration-300">
-                                <img src="/api/placeholder/300/200" alt="Quadra 1" class="w-full h-40 object-cover rounded mb-4">
-                                <h4 class="font-bold text-lg">Quadra 1</h4>
-                                <p class="text-gray-600">Quadra poliesportiva coberta</p>
-                            </div>
-                        </div>
-                        <div class="cursor-pointer quadra" onclick="selectQuadra(this)">
-                            <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-green-600 transition duration-300">
-                                <img src="/api/placeholder/300/200" alt="Quadra 2" class="w-full h-40 object-cover rounded mb-4">
-                                <h4 class="font-bold text-lg">Quadra 2</h4>
-                                <p class="text-gray-600">Quadra de futsal</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- Indicador de Passos -->
+      <div class="step-indicator mb-4">
+        <div class="step active">Quadra</div>
+        <div class="step">Data</div>
+        <div class="step">Horários</div>
+        <div class="step">Dados Pessoais</div>
+        <div class="step">Revisão</div>
+        <div class="step">Pagamento</div>
+      </div>
 
-                <!-- Step 2: Escolha da Data -->
-                <div class="step-form" id="step2">
-                    <h3 class="text-2xl font-bold mb-6">Escolha a Data</h3>
-                    <div class="grid grid-cols-3 gap-4">
-                        <!-- Dates will be populated by JavaScript -->
-                        <div class="border rounded-lg p-4">01/11/2024</div>
-                        <div class="border rounded-lg p-4">02/11/2024</div>
-                        <div class="border rounded-lg p-4">03/11/2024</div>
-                    </div>
-                </div>
+      <!-- Barra de Progresso -->
+      <div class="progress mb-4">
+        <div class="progress-bar" style="background-color: #4caf50"></div>
+      </div>
 
-                <!-- Step 3: Escolha dos Horários -->
-                <div class="step-form" id="step3">
-                    <h3 class="text-2xl font-bold mb-6">Escolha os Horários</h3>
-                    <div class="grid grid-cols-4 gap-4 mb-6">
-                        <div class="border rounded-lg p-4">08:00</div>
-                        <div class="border rounded-lg p-4">09:00</div>
-                        <div class="border rounded-lg p-4">10:00</div>
-                        <div class="border rounded-lg p-4">11:00</div>
-                    </div>
-                    <div class="bg-gray-100 p-4 rounded-lg">
-                        <h4 class="font-bold mb-2">Resumo</h4>
-                        <p>Horários selecionados: <span id="selectedCount">0</span></p>
-                        <p>Valor total: R$ <span id="totalValue">0,00</span></p>
-                        <p class="text-sm text-gray-600">* Desconto aplicado para 3 ou mais horários</p>
-                    </div>
-                </div>
-
-                <!-- Step 4: Dados Pessoais -->
-                <div class="step-form" id="step4">
-                    <h3 class="text-2xl font-bold mb-6">Seus Dados</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-gray-700 mb-2" for="nome">Nome Completo</label>
-                            <input type="text" id="nome" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500" required>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2" for="email">E-mail</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500" required>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2" for="telefone">Telefone</label>
-                            <input type="tel" id="telefone" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500" required>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2" for="observacoes">Observações</label>
-                            <textarea id="observacoes" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-green-500"></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Navegação -->
-                <div class="flex justify-center mt-8">
-                    <button id="prevBtn" class="hidden bg-gray-300 hover:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-                        Voltar
-                    </button>
-                    <button id="nextBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
-                        Próximo
-                    </button>
-                </div>
-            </div>
+      <!-- Passo 1: Seleção de Quadra -->
+      <div class="step-form active" id="step1">
+        <h2 class="text-xl font-semibold mb-2">Escolha uma Quadra</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div
+            class="border rounded-lg p-4 cursor-pointer quadra"
+            onclick="selectQuadra(this)"
+          >
+            <img
+              src="/img/quadra-areia-1.jpg"
+              alt="Quadra 1"
+              class="w-full h-32 object-cover mb-2 rounded-lg"
+            />
+            <h4 class="text-lg">Quadra 1</h4>
+            <p>R$ 70,00</p>
+          </div>
+          <div
+            class="border rounded-lg p-4 cursor-pointer quadra"
+            onclick="selectQuadra(this)"
+          >
+            <img
+              src="/img/quadra-areia-2.jpg"
+              alt="Quadra 2"
+              class="w-full h-32 object-cover mb-2 rounded-lg"
+            />
+            <h4 class="text-lg">Quadra 2</h4>
+            <p>R$ 70,00</p>
+          </div>
         </div>
+      </div>
+
+      <!-- Passo 2: Seleção de Data -->
+      <div class="step-form" id="step2">
+        <h2 class="text-xl font-semibold mb-2">Escolha uma Data</h2>
+        <div class="grid grid-cols-3 gap-4">
+          <div
+            class="border rounded-lg p-4 cursor-pointer date"
+            onclick="selectDate(this)"
+          >
+            <h4 class="text-lg">01/11/2024</h4>
+          </div>
+          <div
+            class="border rounded-lg p-4 cursor-pointer date"
+            onclick="selectDate(this)"
+          >
+            <h4 class="text-lg">02/11/2024</h4>
+          </div>
+          <div
+            class="border rounded-lg p-4 cursor-pointer date"
+            onclick="selectDate(this)"
+          >
+            <h4 class="text-lg">03/11/2024</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passo 3: Seleção de Horários -->
+      <div class="step-form" id="step3">
+        <h2 class="text-xl font-semibold mb-2">Escolha os Horários</h2>
+        <div id="timeSlots" class="grid grid-cols-3 gap-4"></div>
+        <p class="mt-4">
+          Total Selecionado: <span id="selectedCount">0</span> horários - R$
+          <span id="totalValue">0.00</span>
+        </p>
+      </div>
+
+      <!-- Passo 4: Dados Pessoais -->
+      <div class="step-form" id="step4">
+        <h2 class="text-xl font-semibold mb-2">Dados Pessoais</h2>
+        <input
+          type="text"
+          id="nome"
+          placeholder="Nome"
+          class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
+          required
+        />
+        <input
+          type="email"
+          id="email"
+          placeholder="E-mail"
+          class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
+          required
+        />
+        <input
+          type="text"
+          id="telefone"
+          placeholder="Telefone"
+          class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
+          required
+        />
+      </div>
+
+      <!-- Passo 5: Revisão -->
+      <div class="step-form" id="step5">
+        <h2 class="text-xl font-semibold mb-2">Revisão</h2>
+        <div class="receipt">
+          <p><strong>Quadra:</strong> <span id="reviewQuadra"></span></p>
+          <p><strong>Data:</strong> <span id="reviewData"></span></p>
+          <p><strong>Horários:</strong> <span id="reviewHorarios"></span></p>
+          <p><strong>Total:</strong> R$ <span id="reviewTotal"></span></p>
+        </div>
+      </div>
+
+      <!-- Passo 6: Pagamento -->
+      <div class="step-form" id="step6">
+        <h2 class="text-xl font-semibold mb-2">Pagamento</h2>
+        <div class="qr-container">
+          <h4 class="text-lg">QR Code Pix</h4>
+          <img src="/img/qrcode.png" alt="QR Code" class="w-32 h-32 mb-2" />
+          <div class="copy-area">
+            <input
+              type="text"
+              value="123456789123456789123456789123456789123456789123456789123456789"
+              class="copy-input"
+              id="pixKey"
+              readonly
+            />
+            <button
+              class="py-2 px-4 bg-gray-300 text-white rounded"
+              onclick="copyToClipboard()"
+            >
+              Copiar
+            </button>
+          </div>
+          <p class="instructions">
+            Copia e cola essa chave para realizar o pagamento.
+          </p>
+          <p class="instructions">
+            Instruções: Siga os passos para efetuar o pagamento com o Pix.
+          </p>
+          <p class="instructions">
+            Por favor, finalize o pagamento e clique abaixo para confirmar.
+          </p>
+          <button
+            id="paymentButton"
+            class="mt-4 py-2 px-4 bg-gray-300 text-white rounded"
+            disabled
+          >
+            Já fiz o Pagamento
+          </button>
+          <!-- Botão desativado -->
+        </div>
+      </div>
+
+      <!-- Botão de Navegação -->
+      <div class="flex justify-center mt-6">
+        <button id="nextBtn" class="py-2 px-4 rounded">Próximo</button>
+      </div>
     </section>
 
-    
+    <footer class="bg-green-600">
+        <div class="footer-content ">
+          <div class="footer-section about">
+            <h2>Sobre o Clube</h2>
+            <p>
+              O nosso clube oferece um espaço ideal para lazer e entretenimento,
+              com um bar completo, aluguel de espaços para eventos e quadras para
+              esportes.
+            </p>
+          </div>
+          <div class="footer-section services">
+            <h2>Serviços</h2>
+            <ul>
+              <li><a href="#">Aluguel de Espaço</a></li>
+              <li><a href="#">Aluguel de Quadras</a></li>
+              <li><a href="#">Bar e Restaurante</a></li>
+            </ul>
+          </div>
+          <div class="footer-section contact">
+            <h2>Contato</h2>
+            <p>Email: contato@clube.com</p>
+            <p>Telefone: (11) 1234-5678</p>
+          </div>
+          <div class="footer-section social">
+            <h2>Siga-nos</h2>
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          &copy; 2024 Clube. Todos os direitos reservados.
+        </div>
+      </footer>
+      
+      
 
-    <script>
-        let currentStep = 1; // Define o primeiro passo como o inicial
-        const totalSteps = 4; // Total de passos
-
-        const progressBar = document.querySelector(".progress-bar");
-        const stepForms = document.querySelectorAll(".step-form");
-        const prevBtn = document.getElementById("prevBtn");
-        const nextBtn = document.getElementById("nextBtn");
-
-        // Função para atualizar a visualização do formulário e a barra de progresso
-        function updateStep() {
-            stepForms.forEach((form, index) => {
-                form.classList.toggle("active", index + 1 === currentStep);
-            });
-
-            // Atualiza a barra de progresso
-            const progressPercent = (currentStep / totalSteps) * 100;
-            progressBar.style.width = `${progressPercent}%`;
-
-            // Atualiza as cores dos passos no cabeçalho da barra de progresso
-            document.querySelectorAll(".step-header span").forEach((span, index) => {
-                span.classList.toggle("text-green-600", index + 1 <= currentStep);
-                span.classList.toggle("text-gray-400", index + 1 > currentStep);
-            });
-
-            // Controle de exibição dos botões "Voltar" e "Próximo"
-            prevBtn.style.display = currentStep > 1 ? "inline-block" : "none";
-            nextBtn.textContent = currentStep === totalSteps ? "Finalizar" : "Próximo";
-        }
-
-        // Função para o botão "Próximo"
-        nextBtn.addEventListener("click", () => {
-            if (currentStep < totalSteps) {
-                currentStep++;
-                updateStep();
-            } else {
-                // Coloque aqui a lógica para submeter o formulário final
-                alert("Formulário enviado!");
-            }
-        });
-
-        // Função para o botão "Voltar"
-        prevBtn.addEventListener("click", () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateStep();
-            }
-        });
-
-        // Função para selecionar a quadra
-        function selectQuadra(element) {
-            // Remove a classe "selected" de todos os elementos
-            const quadras = document.querySelectorAll(".quadra");
-            quadras.forEach(quadra => {
-                quadra.querySelector('div').classList.remove("selected");
-            });
-
-            // Adiciona a classe "selected" ao elemento clicado
-            element.querySelector('div').classList.add("selected");
-
-            // Centraliza o botão "Próximo"
-            nextBtn.classList.add("mx-auto");
-        }
-
-        // Inicializa o formulário
-        updateStep();
-    </script>
-</body>
+    <script src="/script.js"></script>
+  </body>
 </html>
-
