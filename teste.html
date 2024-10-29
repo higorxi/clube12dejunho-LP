@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Quadra</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .step-form {
+            display: none;
+        }
+        .step-form.active {
+            display: block;
+        }
+        .selected {
+            background-color: #4caf50; /* Verde */
+            color: white;
+        }
+        .border {
+            border: 2px solid #e0e0e0;
+            transition: border-color 0.3s;
+        }
+        .border:hover {
+            border-color: #4caf50;
+        }
+        #nextBtn {
+            background-color: #4caf50; /* Verde */
+            color: white;
+        }
+        #prevBtn {
+            background-color: #607d8b; /* Azul escuro */
+            color: white;
+        }
+        #nextBtn:hover, #prevBtn:hover {
+            filter: brightness(0.9);
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .step:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100%;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: -1;
+        }
+        .step:last-child:after {
+            content: none;
+        }
+        .step.active {
+            font-weight: bold;
+            color: #4caf50; /* Verde */
+        }
+        .progress {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #4caf50; /* Verde */
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-4">Agendamento de Quadra</h1>
+        
+        <!-- Indicador de Passos -->
+        <div class="step-indicator">
+            <div class="step active">Quadra</div>
+            <div class="step">Data</div>
+            <div class="step">Horários</div>
+            <div class="step">Dados Pessoais</div>
+            <div class="step">Pagamento</div>
+            <div class="step">Revisão</div>
+        </div>
+
+        <!-- Barra de Progresso -->
+        <div class="progress mb-4">
+            <div class="progress-bar"></div>
+        </div>
+        
+        <!-- Passo 1: Seleção de Quadra -->
+        <div class="step-form active" id="step1">
+            <h2 class="text-xl font-semibold mb-2">Escolha uma Quadra</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="border rounded-lg p-4 cursor-pointer quadra" onclick="selectQuadra(this)">
+                    <h4 class="text-lg">Quadra 1</h4>
+                    <p>R$ 70,00</p>
+                </div>
+                <div class="border rounded-lg p-4 cursor-pointer quadra" onclick="selectQuadra(this)">
+                    <h4 class="text-lg">Quadra 2</h4>
+                    <p>R$ 70,00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Passo 2: Seleção de Data -->
+        <div class="step-form" id="step2">
+            <h2 class="text-xl font-semibold mb-2">Escolha uma Data</h2>
+            <div class="grid grid-cols-3 gap-4">
+                <div class="border rounded-lg p-4 cursor-pointer date" onclick="selectDate(this)">
+                    <h4 class="text-lg">01/11/2024</h4>
+                </div>
+                <div class="border rounded-lg p-4 cursor-pointer date" onclick="selectDate(this)">
+                    <h4 class="text-lg">02/11/2024</h4>
+                </div>
+                <div class="border rounded-lg p-4 cursor-pointer date" onclick="selectDate(this)">
+                    <h4 class="text-lg">03/11/2024</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Passo 3: Seleção de Horários -->
+        <div class="step-form" id="step3">
+            <h2 class="text-xl font-semibold mb-2">Escolha os Horários</h2>
+            <div id="timeSlots" class="grid grid-cols-3 gap-4"></div>
+            <p class="mt-4">Total Selecionado: <span id="selectedCount">0</span> horários - R$ <span id="totalValue">0.00</span></p>
+        </div>
+
+        <!-- Passo 4: Dados Pessoais -->
+        <div class="step-form" id="step4">
+            <h2 class="text-xl font-semibold mb-2">Dados Pessoais</h2>
+            <input type="text" id="nome" placeholder="Nome" class="border p-2 w-full mb-2" required>
+            <input type="email" id="email" placeholder="E-mail" class="border p-2 w-full mb-2" required>
+            <input type="text" id="telefone" placeholder="Telefone" class="border p-2 w-full mb-2" required>
+        </div>
+
+        <!-- Passo 5: Pagamento -->
+        <div class="step-form" id="step5">
+            <h2 class="text-xl font-semibold mb-2">Pagamento</h2>
+            <div class="border rounded-lg p-4 mb-4">
+                <h4 class="text-lg">QR Code Pix</h4>
+                <img src="path/to/qr-code.png" alt="QR Code" class="w-32 h-32 mb-2">
+                <p>Chave: 123456789</p>
+                <p>Copia e cola essa chave para realizar o pagamento.</p>
+                <p>Instruções: Siga os passos para efetuar o pagamento com o Pix.</p>
+            </div>
+        </div>
+
+        <!-- Passo 6: Revisão -->
+        <div class="step-form" id="step6">
+            <h2 class="text-xl font-semibold mb-2">Revisão</h2>
+            <p>Quadra: <span id="reviewQuadra"><span></p>
+            <p>Data: <span id="reviewData"><span></p>
+            <p>Horários: <span id="reviewHorarios"><span></p>
+            <p>Total: R$ <span id="reviewTotal"><span></p>
+        </div>
+
+        <!-- Botões de Navegação -->
+        <div class="flex justify-center mt-6">
+            <button id="prevBtn" class="py-2 px-4 rounded">Voltar</button>
+            <button id="nextBtn" class="py-2 px-4 rounded">Próximo</button>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6; // Atualize para 6, já que agora temos 6 passos
+        const stepForms = document.querySelectorAll('.step-form');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const progressBar = document.querySelector('.progress-bar');
+        const steps = document.querySelectorAll('.step');
+
+        // Função para gerar os horários
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            for (let hour = 18; hour <= 24; hour++) {
+                for (let minute = 0; minute < 60; minute += 30) {
+                    const timeSlot = document.createElement('div');
+                    timeSlot.className = 'border rounded-lg p-4 cursor-pointer time-slot';
+                    timeSlot.innerText = `${hour}:${minute === 0 ? '00' : minute}`;
+                    timeSlot.onclick = function () {
+                        selectTimeSlot(timeSlot);
+                    };
+                    timeSlotsContainer.appendChild(timeSlot);
+                }
+            }
+        }
+
+        function selectQuadra(element) {
+            document.querySelectorAll('.quadra').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function selectDate(element) {
+            document.querySelectorAll('.date').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('nextBtn').disabled = false;
+        }
+
+        function selectTimeSlot(element) {
+            element.classList.toggle('selected');
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const selectedSlots = document.querySelectorAll('.time-slot.selected');
+            const total = selectedSlots.length * 70; // R$ 70,00 por horário
+            document.getElementById('selectedCount').innerText = selectedSlots.length;
+            document.getElementById('totalValue').innerText = total.toFixed(2);
+        }
+
+        function updateProgressBar() {
+            const progressPercent = (currentStep / totalSteps) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            steps.forEach((step, index) => {
+                step.classList.toggle('active', index < currentStep);
+            });
+        }
+
+        function showStep(step) {
+            stepForms.forEach(form => form.classList.remove('active'));
+            stepForms[step - 1].classList.add('active');
+            updateProgressBar();
+            prevBtn.style.display = step === 1 ? 'none' : 'inline-block';
+            nextBtn.innerText = step === totalSteps ? 'Finalizar' : 'Próximo';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                // Lógica de finalização
+                alert("Agendamento finalizado!");
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+
+        // Gera os horários ao carregar a página
+        window.onload = generateTimeSlots;
+    </script>
+</body>
+</html>
