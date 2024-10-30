@@ -227,176 +227,164 @@
 
     <!-- Formulário Step by Step -->
     <section
-      class="bg-white shadow-lg rounded-lg p-6 mb-6 px-16"
-      style="min-height: 600px"
-    >
-      <!-- Define a altura mínima para evitar efeito sanfona -->
-      <h1 class="text-3xl font-bold mb-4">Agendamento de Quadra</h1>
+  class="bg-white shadow-lg rounded-lg p-4 md:p-6 mb-6 md:px-16"
+  style="min-height: 600px"
+>
+  <h1 class="text-2xl md:text-3xl font-bold mb-4">Agendamento de Quadra</h1>
 
-      <!-- Indicador de Passos -->
-      <div class="step-indicator mb-4">
-        <div class="step active">Quadra</div>
-        <div class="step">Data</div>
-        <div class="step">Horários</div>
-        <div class="step">Dados Pessoais</div>
-        <div class="step">Revisão</div>
-        <div class="step">Pagamento</div>
+  <!-- Indicador de Passos -->
+  <div class="step-indicator mb-4 flex flex-wrap justify-center gap-2">
+    <div class="step active">Quadra</div>
+    <div class="step">Data</div>
+    <div class="step">Horários</div>
+    <div class="step">Dados Pessoais</div>
+    <div class="step">Revisão</div>
+    <div class="step">Pagamento</div>
+  </div>
+
+  <!-- Barra de Progresso -->
+  <div class="progress mb-4">
+    <div class="progress-bar" style="background-color: #4caf50"></div>
+  </div>
+
+  <!-- Passo 1: Seleção de Quadra -->
+  <div class="step-form active" id="step1">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">Escolha uma Quadra</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div
+        class="border rounded-lg p-4 cursor-pointer quadra"
+        onclick="selectQuadra(this)"
+      >
+        <img
+          src="./img/quadra-areia-1.jpg"
+          alt="Quadra 1"
+          class="w-full h-32 object-cover mb-2 rounded-lg"
+        />
+        <h4 class="text-md md:text-lg">Quadra 1</h4>
+        <p>R$ 70,00</p>
       </div>
-
-      <!-- Barra de Progresso -->
-      <div class="progress mb-4">
-        <div class="progress-bar" style="background-color: #4caf50"></div>
+      <div
+        class="border rounded-lg p-4 cursor-pointer quadra"
+        onclick="selectQuadra(this)"
+      >
+        <img
+          src="./img/quadra-areia-2.jpg"
+          alt="Quadra 2"
+          class="w-full h-32 object-cover mb-2 rounded-lg"
+        />
+        <h4 class="text-md md:text-lg">Quadra 2</h4>
+        <p>R$ 70,00</p>
       </div>
+    </div>
+  </div>
 
-      <!-- Passo 1: Seleção de Quadra -->
-      <div class="step-form active" id="step1">
-        <h2 class="text-xl font-semibold mb-2">Escolha uma Quadra</h2>
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            class="border rounded-lg p-4 cursor-pointer quadra"
-            onclick="selectQuadra(this)"
-          >
-            <img
-              src="./img/quadra-areia-1.jpg"
-              alt="Quadra 1"
-              class="w-full h-32 object-cover mb-2 rounded-lg"
-            />
-            <h4 class="text-lg">Quadra 1</h4>
-            <p>R$ 70,00</p>
-          </div>
-          <div
-            class="border rounded-lg p-4 cursor-pointer quadra"
-            onclick="selectQuadra(this)"
-          >
-            <img
-              src="./img/quadra-areia-2.jpg"
-              alt="Quadra 2"
-              class="w-full h-32 object-cover mb-2 rounded-lg"
-            />
-            <h4 class="text-lg">Quadra 2</h4>
-            <p>R$ 70,00</p>
-          </div>
-        </div>
+  <!-- Passo 2: Seleção de Data -->
+  <div class="step-form" id="step2">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">Escolha uma Data</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div
+        class="border rounded-lg p-4 cursor-pointer date"
+        onclick="selectDate(this)"
+      >
+        <h4 class="text-md md:text-lg">01/11/2024</h4>
       </div>
-
-      <!-- Passo 2: Seleção de Data -->
-      <div class="step-form" id="step2">
-        <h2 class="text-xl font-semibold mb-2">Escolha uma Data</h2>
-        <div class="grid grid-cols-3 gap-4">
-          <div
-            class="border rounded-lg p-4 cursor-pointer date"
-            onclick="selectDate(this)"
-          >
-            <h4 class="text-lg">01/11/2024</h4>
-          </div>
-          <div
-            class="border rounded-lg p-4 cursor-pointer date"
-            onclick="selectDate(this)"
-          >
-            <h4 class="text-lg">02/11/2024</h4>
-          </div>
-          <div
-            class="border rounded-lg p-4 cursor-pointer date"
-            onclick="selectDate(this)"
-          >
-            <h4 class="text-lg">03/11/2024</h4>
-          </div>
-        </div>
+      <div
+        class="border rounded-lg p-4 cursor-pointer date"
+        onclick="selectDate(this)"
+      >
+        <h4 class="text-md md:text-lg">02/11/2024</h4>
       </div>
-
-      <!-- Passo 3: Seleção de Horários -->
-      <div class="step-form" id="step3">
-        <h2 class="text-xl font-semibold mb-2">Escolha os Horários</h2>
-        <div id="timeSlots" class="grid grid-cols-3 gap-4"></div>
-        <p class="mt-4">
-          Total Selecionado: <span id="selectedCount">0</span> horários - R$
-          <span id="totalValue">0.00</span>
-        </p>
+      <div
+        class="border rounded-lg p-4 cursor-pointer date"
+        onclick="selectDate(this)"
+      >
+        <h4 class="text-md md:text-lg">03/11/2024</h4>
       </div>
+    </div>
+  </div>
 
-      <!-- Passo 4: Dados Pessoais -->
-      <div class="step-form" id="step4">
-        <h2 class="text-xl font-semibold mb-2">Dados Pessoais</h2>
+  <!-- Passo 3: Seleção de Horários -->
+  <div class="step-form" id="step3">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">Escolha os Horários</h2>
+    <div id="timeSlots" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+    <p class="mt-4 text-sm md:text-base">
+      Total Selecionado: <span id="selectedCount">0</span> horários - R$
+      <span id="totalValue">0.00</span>
+    </p>
+  </div>
+
+  <!-- Passo 4: Dados Pessoais -->
+  <div class="step-form" id="step4">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">Dados Pessoais</h2>
+    <input
+      type="text"
+      id="nome"
+      placeholder="Nome"
+      class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
+      required
+    />
+    <input
+      type="email"
+      id="email"
+      placeholder="E-mail"
+      class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
+      required
+    />
+    <input
+      type="text"
+      id="telefone"
+      placeholder="Telefone"
+      class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
+      required
+    />
+  </div>
+
+  <!-- Passo 5: Revisão -->
+  <div class="step-form" id="step5">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">Revisão</h2>
+    <div class="receipt text-sm md:text-base">
+      <p><strong>Quadra:</strong> <span id="reviewQuadra"></span></p>
+      <p><strong>Data:</strong> <span id="reviewData"></span></p>
+      <p><strong>Horários:</strong> <span id="reviewHorarios"></span></p>
+      <p><strong>Total:</strong> R$ <span id="reviewTotal"></span></p>
+    </div>
+  </div>
+
+  <!-- Passo 6: Pagamento -->
+  <div class="step-form" id="step6">
+    <h2 class="text-lg md:text-xl font-semibold mb-2">Pagamento</h2>
+    <div class="qr-container">
+      <h4 class="text-md md:text-lg">QR Code Pix</h4>
+      <img src="./img/qrcode.png" alt="QR Code" class="w-24 h-24 md:w-32 md:h-32 mb-2" />
+      <div class="copy-area flex flex-col md:flex-row items-center gap-2">
         <input
           type="text"
-          id="nome"
-          placeholder="Nome"
-          class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
-          required
+          value="123456789123456789123456789123456789123456789123456789123456789"
+          class="copy-input w-full md:w-auto"
+          id="pixKey"
+          readonly
         />
-        <input
-          type="email"
-          id="email"
-          placeholder="E-mail"
-          class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
-          required
-        />
-        <input
-          type="text"
-          id="telefone"
-          placeholder="Telefone"
-          class="border p-2 w-full mb-2 rounded-lg focus:ring focus:ring-blue-300"
-          required
-        />
+        <button
+          class="py-2 px-4 bg-gray-300 text-white rounded"
+          onclick="copyToClipboard()"
+        >
+          Copiar
+        </button>
       </div>
+      <p class="instructions text-sm md:text-base">
+        Copia e cola essa chave para realizar o pagamento.
+      </p>
+    </div>
+  </div>
 
-      <!-- Passo 5: Revisão -->
-      <div class="step-form" id="step5">
-        <h2 class="text-xl font-semibold mb-2">Revisão</h2>
-        <div class="receipt">
-          <p><strong>Quadra:</strong> <span id="reviewQuadra"></span></p>
-          <p><strong>Data:</strong> <span id="reviewData"></span></p>
-          <p><strong>Horários:</strong> <span id="reviewHorarios"></span></p>
-          <p><strong>Total:</strong> R$ <span id="reviewTotal"></span></p>
-        </div>
-      </div>
+  <!-- Botão de Navegação -->
+  <div class="flex justify-center mt-6">
+    <button id="nextBtn" class="py-2 px-4 rounded bg-blue-500 text-white">
+      Próximo
+    </button>
+  </div>
+</section>
 
-      <!-- Passo 6: Pagamento -->
-      <div class="step-form" id="step6">
-        <h2 class="text-xl font-semibold mb-2">Pagamento</h2>
-        <div class="qr-container">
-          <h4 class="text-lg">QR Code Pix</h4>
-          <img src="./img/qrcode.png" alt="QR Code" class="w-32 h-32 mb-2" />
-          <div class="copy-area">
-            <input
-              type="text"
-              value="123456789123456789123456789123456789123456789123456789123456789"
-              class="copy-input"
-              id="pixKey"
-              readonly
-            />
-            <button
-              class="py-2 px-4 bg-gray-300 text-white rounded"
-              onclick="copyToClipboard()"
-            >
-              Copiar
-            </button>
-          </div>
-          <p class="instructions">
-            Copia e cola essa chave para realizar o pagamento.
-          </p>
-          <p class="instructions">
-            Instruções: Siga os passos para efetuar o pagamento com o Pix.
-          </p>
-          <p class="instructions">
-            Por favor, finalize o pagamento e clique abaixo para confirmar.
-          </p>
-          <button
-            id="paymentButton"
-            class="mt-4 py-2 px-4 bg-gray-300 text-white rounded"
-            disabled
-          >
-            Já fiz o Pagamento
-          </button>
-          <!-- Botão desativado -->
-        </div>
-      </div>
-
-      <!-- Botão de Navegação -->
-      <div class="flex justify-center mt-6">
-        <button id="nextBtn" class="py-2 px-4 rounded">Próximo</button>
-      </div>
-    </section>
 
     <footer class="bg-green-600">
         <div class="footer-content ">
